@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+<body  data-home-page-title="{{titel}}" class="u-body u-xl-mode" data-lang="ru">
+{% block content %}
+      <section class="u-align-center u-clearfix u-palette-5-dark-3 u-section-1" id="sec-316b">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-text u-text-1">{{quduq.qudug_nomi}}</h1>
+        <h2 class="u-text u-text-2">Qudug'ining ko'rsatgichlari</h2>
+        <div class="u-expanded-width u-table u-table-responsive u-table-1">
+          <table id="TableData" class="u-table-entity">
+            <colgroup>
+              <col width="23.6%">
+              <col width="18.4%">
+              <col width="20%">
+              <col width="20%">
+              <col width="18%">
+            </colgroup>
+            <thead class="u-align-center u-palette-4-light-3 u-table-header u-table-header-1">
+              <tr style="height: 47px;">
+                <th class="u-align-left u-table-cell u-table-cell-1">O'lchangan vaqti</th>
+                <th class="u-palette-3-base u-table-cell u-table-cell-2"><b>Suv sathi, sm</b>
+                </th>
+                <th class="u-palette-2-base u-table-cell u-table-cell-3"><b>temperatura, 0C</b>
+                </th>
+                <th class="u-palette-4-base u-table-cell u-table-cell-4">shurlanganlig TDS</th>
+                <th class="u-palette-1-base u-table-cell u-table-cell-5"> ishqor miqdori PH<br>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="u-align-center u-palette-5-dark-3 u-table-body u-table-body-1">
+              
+              {% for p in param %}
+              <tr style="height: 48px;">
+                <td class="u-align-left u-border-1 u-border-palette-5-dark-2 u-first-column u-table-cell"> {{p.mes_date}}</td>
+                <td class="u-border-1 u-border-palette-5-dark-2 u-table-cell">{{p.sath_quduq}} </td>
+                <td class="u-border-1 u-border-palette-5-dark-2 u-table-cell">{{p.tempInC}} </td>
+                <td class="u-border-1 u-border-palette-5-dark-2 u-table-cell">{{p.Sim}} </td>
+                <td class="u-border-1 u-border-palette-5-dark-2 u-table-cell">{{p.PH}} </td>
+              </tr>                
+              {% endfor %}
+
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-section-2" id="sec-7d6e">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="data-layout-selected u-clearfix u-expanded-width u-gutter-12 u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-align-center u-container-style u-image u-layout-cell u-size-42 u-image-1" data-image-width="400" data-image-height="265">
+                <div class="u-container-layout u-container-layout-1"></div>
+              </div>
+              <div class="u-container-align-center u-container-style u-layout-cell u-size-18 u-layout-cell-2">
+                <div class="u-container-layout u-valign-middle u-container-layout-2">
+                  <h3 class="u-align-center u-text u-text-default u-text-1"> {{quduq.qudug_nomi}}</h3>
+                  <h2 class="u-align-center u-text u-text-default u-text-2">Quduq koordinatasi</h2>
+                  <p class="u-align-center u-text u-text-default u-text-3">{{quduq.Location}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</body> 
+{% endblock  %}
+

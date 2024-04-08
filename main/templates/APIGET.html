@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru">
+    <title>{{titel}}</title>
+<!-- Favicons for different platforms -->
+<link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/favicon/apple-touch-icon.png" %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static "assets/favicon/favicon-32x32.png" %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static "assets/favicon/favicon-16x16.png" %}">
+<link rel="manifest" href="{% static "assets/favicon/site.webmanifest" %}">
+{% if erb %}
+<p>
+    sathi={{sath}} cm <tr>
+    temperatura={{temp}} gradus <tr>
+    PH={{PH}}  <tr>
+    Sho'rlanganlik={{Sim}}  <tr>
+    Olingan vaqti={{date}}
+</p>
+{% else %}
+<p> {{err}}</p>
+{% endif %}
+
+</html>
