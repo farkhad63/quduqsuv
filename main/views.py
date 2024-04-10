@@ -54,8 +54,8 @@ def APIGET(request):
         }
     return render(request,'APIGET.html',content)
     
-def index(request):
-    q_id=1
+def home(request,q_slug):
+    q_id=int(q_slug)
     Qudug=Quduglar.objects.all()    
     params=korsatgichlari.objects.order_by("-mes_date").filter(quduq_id=q_id)
    
@@ -64,7 +64,7 @@ def index(request):
     'quduq':Qudug[q_id-1],
     'param':params
     }
-    return render(request,'index.html',content)
+    return render(request,'home.html',content)
 
 def about(request):
     content = {
@@ -73,12 +73,13 @@ def about(request):
      }
     return render(request,'about.html',content)
 
-def home(request):
+def index(request):
+    Qudug=Quduglar.objects.all() 
     content = {
     'titel':'Bosh sahifa',
-    'Content':"Quduqlar joylashuvi"
+    'qdq':Qudug
      }
-    return render(request,'home.html',content)
+    return render(request,'index.html',content)
 
 def develop(request):
     content = {
