@@ -1,4 +1,5 @@
-from ast import Str
+from ast import For, Str
+from codecs import BOM_UTF16
 from datetime import date
 from django.shortcuts import render
 
@@ -6,6 +7,18 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from main.models import Quduglar, korsatgichlari
+import telebot
+
+token = '5836696466:AAGS22K-AeXm9mBdQoEEyVxDt2YjKX-iM6k'
+chat_id = [99036877,6116657330,58016741]
+#1311010029 Lutfiya
+#99036877 Farxat
+#6116657330 Djumanov
+#58016741 Kamola
+#166241966 Dilhod Eshmurodov 166241966
+#58293454 Begzod 58293454
+FIO=['F.F. Rajabov','J.X. Djumanov','K. Abdurashidova']
+bot = telebot.TeleBot(token)
 
 def APIGET(request):
     erb= bool(request.GET)
@@ -30,7 +43,19 @@ def APIGET(request):
             Qudug=Quduglar.objects.all()    
  #           params=korsatgichlari.objects.order_by("-mes_date").filter(quduq_id=q_id)
             params=korsatgichlari(quduq_id=q_id,sath_quduq=sath,tempInC=temp,PH=PH,Sim=Sim,mes_date=timeDate)
-            params.save()                       
+            params.save() 
+            if Sim==0:
+                k=0
+                message="Hurmatli " + FIO[k] +", Sizga ma'lum qilamizki, monitoring qilinayotgan quduq suvi Shurlanganligi(TDS):0  ppm ga teng !! Qudugda suv yo'q yoki o'lchagich suv sathidan balanda.  Dear, We inform you that the monitored well water Salinity(TDS): 0 ppm !! There is no water in the well or the meter is above the water level"
+                for id in chat_id:
+                    bot.send_message(id,message)
+                    k=k+1
+                message="Axborot sifatida Sizga ma'lum qilamizki, monitoring qilinayotgan quduq suvi Sathi:"+ str(sath) + " sm, Temeraturasi:" + str(temp) +" °C, Ichqorligi(PH):" + str(PH) +' ga teng !! For your information, we inform you that the well water being monitored is Level: ' +str(sath) + ' cm, Temperature:' + str(temp) + ' °C, Alkalinity (PH)' + str(PH)  + ' !!'
+                for id in chat_id:
+                    bot.send_message(id,message)
+                message="Siz https://qudugsuvi.uz/home/"+str(q_id)+"/ saytiga kirib, quduq suvi sifati va sathi o'zgarishi dinamikasini ko'rishingiz mumkin! You can visit https://qudugsuvi.uz/home/"+str(q_id)+"/ and see the dynamics of well water quality and level changes!"
+                for id in chat_id:
+                    bot.send_message(id,message)
         except ValueError:
             content = {
                 'titel':'Xato',
@@ -71,6 +96,8 @@ def about(request):
     'titel':'Haqimizda',
     'Content':"Qisaqcha ma'lumot"
      }
+    for id in chat_id:
+       bot.send_message(id,'Tekshiruv')
     return render(request,'about.html',content)
 
 def index(request):
@@ -87,3 +114,4 @@ def develop(request):
     'Content':"Quduqlar joylashuvi"
      }
     return render(request,'develop.html',content)
+
